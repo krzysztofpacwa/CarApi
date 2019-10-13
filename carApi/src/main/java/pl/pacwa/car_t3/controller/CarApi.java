@@ -40,10 +40,10 @@ public class CarApi {
     @GetMapping("/color/{color}")
     public ResponseEntity<List<Car>> getCarByColor(@PathVariable String color) {
         List<Car> carList = carService.getCarColor(color);
-        if (carList.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (!carList.isEmpty()) {
+            return new ResponseEntity<>(carList, HttpStatus.OK);
         }
-        return new ResponseEntity<>(carList, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
